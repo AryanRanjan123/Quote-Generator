@@ -1,17 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Quote Generator</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inspirational Quotes</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="quote-box">
-        <h2 id="quote">Click the button to generate a quote!</h2>
-        <button onclick="newQuote()">Generate Quote</button>
+  <div class="quote-box">
+    <div id="quote-container">
+      <div id="quote"></div>
+      <div id="author"></div>
     </div>
+    <div class="controls">
+      <button onclick="newQuote()">New Quote</button>
+      <button onclick="toggleMode()">🌙</button>
+    </div>
+  </div>
 
-    <script src="script.js" defer></script>
+  <script>
+    const quotes = [
+      { text: "The best way to predict the future is to invent it.", author: "Alan Kay" },
+      { text: "Life is 10% what happens to us and 90% how we react to it.", author: "Charles R. Swindoll" },
+      { text: "Your time is limited, so don't waste it living someone else's life.", author: "Steve Jobs" },
+      { text: "Success is not in what you have, but who you are.", author: "Bo Bennett" },
+      { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+      { text: "Do one thing every day that scares you.", author: "Eleanor Roosevelt" },
+      { text: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein" },
+      { text: "Hustle in silence, let your success make the noise.", author: "Unknown" },
+      { text: "Dream big. Start small. Act now.", author: "Robin Sharma" }
+    ];
+
+    const quoteEl = document.getElementById('quote');
+    const authorEl = document.getElementById('author');
+    const body = document.body;
+
+    function typeText(el, text) {
+      el.textContent = "";
+      let i = 0;
+      let interval = setInterval(() => {
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          i++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 25);
+    }
+
+    function newQuote() {
+      const random = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteEl.classList.add("fade");
+      authorEl.classList.add("fade");
+      setTimeout(() => {
+        typeText(quoteEl, `"${random.text}"`);
+        authorEl.textContent = `— ${random.author}`;
+        quoteEl.classList.remove("fade");
+        authorEl.classList.remove("fade");
+      }, 400);
+    }
+
+    function toggleMode() {
+      body.classList.toggle("dark-mode");
+    }
+
+    window.onload = newQuote;
+  </script>
 </body>
 </html>
-<p id="author" style="font-style: italic; color: #555;"></p>
+
 
