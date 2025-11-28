@@ -21,4 +21,9 @@ function newQuote() {
     authorElement.classList.remove("fade");
   }, 500);
 }
+function toggleMode() {
+  body.classList.toggle("dark-mode");
+}
+
+
 
