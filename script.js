@@ -10,17 +10,15 @@ function newQuote() {
   const quoteElement = document.getElementById("quote");
   const authorElement = document.getElementById("author");
 
-  // Fade out
   quoteElement.classList.add("fade");
   authorElement.classList.add("fade");
 
   setTimeout(() => {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    quoteElement.textContent = quotes[randomIndex].text;
-    authorElement.textContent = `– ${quotes[randomIndex].author}`;
-
-    // Fade in
+    const q = quotes[Math.floor(Math.random() * quotes.length)];
+    quoteElement.textContent = q.text;
+    authorElement.textContent = `– ${q.author}`;
     quoteElement.classList.remove("fade");
     authorElement.classList.remove("fade");
   }, 500);
 }
+
